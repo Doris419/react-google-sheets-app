@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/react-google-sheets-app/static/css/main.3d07d7f7.css",
+    "main.js": "/react-google-sheets-app/static/js/main.8dacbcea.js",
+    "index.html": "/react-google-sheets-app/index.html",
+    "main.3d07d7f7.css.map": "/react-google-sheets-app/static/css/main.3d07d7f7.css.map",
+    "main.8dacbcea.js.map": "/react-google-sheets-app/static/js/main.8dacbcea.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.3d07d7f7.css",
+    "static/js/main.8dacbcea.js"
+  ]
+}
