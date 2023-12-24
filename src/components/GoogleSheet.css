@@ -1,0 +1,16 @@
+.google-sheet-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.row {
+    display: flex;
+    align-items: center;
+}
+
+.cell {
+    width: 100px;
+    height: 50px;
+    font-size: small;
+    border:#000000 1px solid;
+}
