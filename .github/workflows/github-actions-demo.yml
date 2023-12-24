@@ -34,5 +34,5 @@ steps:
       env:
         user_name: 'github-actions[bot]'
         user_email: 'github-actions[bot]@users.noreply.github.com'
-        github_token: ${{ secrets.ACTIONS_DEPLOY_ACCESS_TOKEN }}
+        github_token: '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'
         repository: ${{ github.repository }}
