@@ -14,7 +14,7 @@ jobs:
       uses: actions/setup-node@v2   
       with:
         node: 20.10.0
-    # 配置依赖缓存
+      
     - name: yarn cache
       id: yarn-cahce-dir-path
       run: echo "::set-output name=dir::$(yarn cache dir)"
@@ -26,3 +26,9 @@ jobs:
         restore-keys: | 
           ${{ runner.os }}-yarn-
     - run: yarn install && yarn build
+
+    - name: deploy
+      uses: JamesIves/github-pages-deploy-action@v4.2.3
+      with:
+        branch: build
+        folder: build  
