@@ -1,44 +1,38 @@
-name: First GitHub Actions Demo
-on: 
+name: CI/CD
+on:
   push:
-    branches:
-      - master
-      - build
-
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
 jobs:
-  Build:
-    runs-on: ubuntu-latest
-    steps:
-    - name: checkout code
+  build:
+runs-on: ubuntu-latest
+strategy:
+      matrix:
+        node-version: [12.x]
+steps:
+    - name: Checkout repository
       uses: actions/checkout@v2
-    - name: actions/setup-node@v2
-      uses: actions/setup-node@v2   
+- name: Set up Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
       with:
-        node-version: '16.14'
-        cache: 'yarn'
-        cache-dependency-path: '**/yarn.lock'
- 
-    - run: yarn install && yarn build  
-    - name: upload files 
-      uses: actions/upload-artifact@v2
-      with: 
-        name: build-pages
-        path: build
-        retention-days: 1
-  Deploy: 
-    needs: Build 
-    runs-on: ubuntu-latest
-    steps:
-      - name: checkout code
-        uses: actions/checkout@v2
-      - name: download build files
-        uses: actions/download-artifact@v2
-        with:
-          name: build-pages
-          path: build
-      - name: deploy
-        uses: JamesIves/github-pages-deploy-action@v4.2.3
-        with:
-          branch: build
-          folder: build 
-          token: "${{ secrets.DEPLOY_TOKEN }}"  
+        node-version: ${{ matrix.node-version }}
+- name: Install dependencies
+      run: npm install
+- name: Run the tests and generate coverage report
+      run: npm test -- --coverage
+- name: Upload coverage to Codecov
+      uses: codecov/codecov-action@v1
+- name: Build
+      run: npm run build
+- name: Deploy
+      run: |
+        git config --global user.name $user_name
+        git config --global user.email $user_email
+        git remote set-url origin @github.com/${repository">https://${github_token}@github.com/${repository}
+        npm run deploy
+      env:
+        user_name: 'github-actions[bot]'
+        user_email: 'github-actions[bot]@users.noreply.github.com'
+        github_token: ${{ secrets.ACTIONS_DEPLOY_ACCESS_TOKEN }}
+        repository: ${{ github.repository }}
